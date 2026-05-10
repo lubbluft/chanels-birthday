@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday 🌿</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#e8f5e9">
+  <title>Happy Birthday Gorgeous <3</title>
   <style>
     :root {
       --bg: #f4f9f4;
@@ -12,14 +13,16 @@
       --text: #4a4a4a;
       --shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
       background: linear-gradient(135deg, #e8f5e9, #fff8e1);
       color: var(--text);
       min-height: 100vh;
       padding: 2rem 1rem;
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
     .container { max-width: 600px; margin: 0 auto; text-align: center; }
     .ghibli-header h1 { font-size: 2.2rem; color: var(--accent); margin-bottom: 0.5rem; }
@@ -36,25 +39,27 @@
       padding: 1.5rem 1rem;
       cursor: pointer;
       box-shadow: var(--shadow);
-      transition: transform 0.2s, background 0.2s;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease;
       min-height: 140px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       position: relative;
+      touch-action: manipulation;
     }
-    .card:hover, .card:focus { transform: translateY(-3px); }
-    .card-front { font-size: 2.5rem; transition: opacity 0.2s; }
-    .card-back { 
-      font-size: 0.95rem; 
-      opacity: 0; 
-      position: absolute; 
-      padding: 0 1rem;
-      transition: opacity 0.2s;
+    .card:hover, .card:focus { transform: translateY(-4px) scale(1.02); }
+    @media (hover: hover) and (pointer: fine) {
+      .card:hover, .card:focus { box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
     }
-    .card.flipped .card-back { opacity: 1; }
-    .card.flipped .card-front { opacity: 0; }
+    .card-front, .card-back { 
+      font-size: 2.5rem; 
+      transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.35s ease;
+    }
+    .card-back { font-size: 0.95rem; opacity: 0; position: absolute; padding: 0 1rem; }
+    .card.flipped .card-back { opacity: 1; transform: scale(1); }
+    .card.flipped .card-front { opacity: 0; transform: scale(0.95); }
+    
     .notes {
       background: #fff;
       border-radius: 12px;
@@ -68,6 +73,33 @@
     .notes li { margin-bottom: 0.4rem; }
     .small { font-size: 0.85rem; opacity: 0.7; }
     .signoff { margin-top: 2rem; font-style: italic; opacity: 0.85; }
+    
+    .timezone-box { display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0 2rem; flex-wrap: wrap; }
+    .vibe-box { margin: 2rem 0; padding: 1.5rem; background: var(--card); border-radius: 12px; text-align: center; }
+    .vibe-btn { 
+      padding: 0.8rem 1.5rem; background: var(--accent); color: white; border: none; 
+      border-radius: 8px; cursor: pointer; font-size: 1rem; 
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), background 0.2s ease, box-shadow 0.2s ease;
+      touch-action: manipulation;
+    }
+    .vibe-btn:hover { transform: translateY(-2px) scale(1.05); background: #5a7a5a; }
+    @media (hover: hover) and (pointer: fine) {
+      .vibe-btn:hover { box-shadow: 0 4px 12px rgba(107,142,107,0.4); }
+    }
+    .vibe-btn:active { transform: scale(0.97) translateY(0); }
+
+    .soot-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; overflow: hidden; }
+    .sprite {
+      position: absolute; width: 12px; height: 12px; background: #333; border-radius: 50%; opacity: 0.6;
+      animation: floatSprite 8s infinite ease-in-out;
+      will-change: transform, opacity;
+    }
+    .sprite:nth-child(2) { left: 20%; animation-delay: 2s; }
+    .sprite:nth-child(3) { left: 75%; animation-delay: 4s; }
+    @keyframes floatSprite {
+      0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+      50% { transform: translateY(-40vh) translateX(20px); opacity: 0.7; }
+    }
     @media (max-width: 480px) {
       .ghibli-header h1 { font-size: 1.8rem; }
       .loot-grid { grid-template-columns: 1fr; }
@@ -77,8 +109,21 @@
 <body>
   <main class="container">
     <header class="ghibli-header">
-      <h1>Happy Birthday 🎂</h1>
+      <h1>Happy Birthday My Love <3</h1>
       <p class="subtitle">It’s already your day over there, so consider this a little birthday bridge across timezones.</p>
+
+      <div class="timezone-box">
+        <div style="text-align: center;">
+          <div style="font-size: 1.5rem; color: var(--accent);">🇵🇭 Manila</div>
+          <div id="her-time" style="font-size: 1.2rem; font-weight: 500;"></div>
+          <div class="small">Her birthday is happening right now! </div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 1.5rem; color: var(--accent);">🇹🇹 Trinidad</div>
+          <div id="my-time" style="font-size: 1.2rem; font-weight: 500;"></div>
+          <div class="small">You're getting there.. </div>
+        </div>
+      </div>
     </header>
 
     <section class="loot-grid">
@@ -100,20 +145,71 @@
       </div>
     </section>
 
+    <div class="vibe-box">
+      <button class="vibe-btn" onclick="showVibe()">🎲 Pick a birthday vibe</button>
+      <p id="vibe-display" style="margin-top: 1rem; min-height: 1.5rem; font-style: italic;"></p>
+    </div>
+
     <section class="notes">
       <h2>Things I remember you like</h2>
       <ul>
-        <li>Cats (especially the ones that act like they own everything)</li>
+        <li>Cats (WILLOW!!! CHAI!!! ft. casper!!)</li>
         <li>Minecraft (building, exploring, or just avoiding creepers)</li>
         <li>Ramen (any kind, as long as it’s warm)</li>
         <li>Studio Ghibli (the kind of comfort that doesn’t need words)</li>
+        <li>Flowers (daisies!!)</li>
+        <li>Trees (WILLOW TREES!!)</li>
       </ul>
-      <p class="small">This isn’t a test. Just me paying attention. 🐾</p>
+      <p class="small">Just me paying attention (and fighting my horrid memory to actually remember). 🐾</p>
     </section>
 
     <footer class="signoff">
-      <p>No need to reply. No expectations. Just a little digital soot sprite delivering good vibes your way. 🌿✨</p>
+      <p>Just a little digital soot sprite delivering good vibes your way <3</p>
     </footer>
   </main>
+
+  <div class="soot-container">
+    <div class="sprite"></div>
+    <div class="sprite"></div>
+    <div class="sprite"></div>
+  </div>
+
+  <script>
+    const herTZ = "Asia/Manila";
+    const myTZ = "America/Port_of_Spain";
+
+    function updateTimes() {
+      const now = new Date();
+      const herTime = now.toLocaleTimeString("en-GB", { 
+        timeZone: herTZ, 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: false 
+      });
+      const myTime = now.toLocaleTimeString("en-GB", { 
+        timeZone: myTZ, 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: false 
+      });
+      document.getElementById("her-time").textContent = herTime;
+      document.getElementById("my-time").textContent = myTime;
+    }
+    setInterval(updateTimes, 1000);
+    updateTimes();
+
+    const vibes = [
+      "🍜 Eat ramen while watching clouds. Zero guilt.",
+      "🐱 Pet a cat (or watch 3 cat videos). Mandatory.",
+      "⛏️ Build something tiny in Minecraft. No pressure to finish it.",
+      "🎬 Watch one Ghibli film you've seen before. Comfort > novelty.",
+      "🌙 Take a 20-minute walk. Notice 3 small things.",
+      "🛋️ Lie down. Do absolutely nothing. It counts."
+    ];
+    function showVibe() {
+      document.getElementById("vibe-display").textContent = vibes[Math.floor(Math.random() * vibes.length)];
+    }
+  </script>
 </body>
 </html>
+
