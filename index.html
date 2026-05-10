@@ -149,13 +149,15 @@
       <button class="vibe-btn" onclick="showVibe()">🎲 Pick a birthday vibe</button>
       <p id="vibe-display" style="margin-top: 1rem; min-height: 1.5rem; font-style: italic;"></p>
     </div>
-   <div style="margin: 1.5rem 0; padding: 1rem; background: var(--card); border-radius: 12px;">
-     <p style="margin-bottom: 0.5rem; font-size: 0.95rem;">🎵 Birthday soundtrack:</p>
-     <audio controls style="width: 100%; max-width: 320px; display: block; margin: 0 auto;">
-       <source src="Birthday.mp3" type="audio/mpeg">
-       Audio not supported.
-     </audio>
-   </div>
+
+    <div style="margin: 1.5rem 0; padding: 1rem; background: var(--card); border-radius: 12px; text-align: center;">
+      <audio id="bg-audio" autoplay playsinline style="display: none;">
+        <source src="Birthday.mp3" type="audio/mpeg">
+      </audio>
+      <p id="audio-prompt" style="font-size: 0.85rem; opacity: 0.8; display: none;">
+        🎵 Tap anywhere to start the vibe
+      </p>
+    </div>
    
     <section class="notes">
       <h2>Things I remember you like</h2>
@@ -182,29 +184,18 @@
   </div>
 
   <script>
+    // Timezones
     const herTZ = "Asia/Manila";
     const myTZ = "America/Port_of_Spain";
-
     function updateTimes() {
       const now = new Date();
-      const herTime = now.toLocaleTimeString("en-GB", { 
-        timeZone: herTZ, 
-        hour: '2-digit', 
-        minute: '2-digit',
-        hour12: false 
-      });
-      const myTime = now.toLocaleTimeString("en-GB", { 
-        timeZone: myTZ, 
-        hour: '2-digit', 
-        minute: '2-digit',
-        hour12: false 
-      });
-      document.getElementById("her-time").textContent = herTime;
-      document.getElementById("my-time").textContent = myTime;
+      document.getElementById("her-time").textContent = now.toLocaleTimeString("en-GB", { timeZone: herTZ, hour: '2-digit', minute: '2-digit', hour12: false });
+      document.getElementById("my-time").textContent = now.toLocaleTimeString("en-GB", { timeZone: myTZ, hour: '2-digit', minute: '2-digit', hour12: false });
     }
     setInterval(updateTimes, 1000);
     updateTimes();
 
+    // Vibe generator
     const vibes = [
       "🍜 Eat ramen while watching clouds. Zero guilt.",
       "🐱 Pet a cat (or watch 3 cat videos). Mandatory.",
@@ -216,6 +207,12 @@
     function showVibe() {
       document.getElementById("vibe-display").textContent = vibes[Math.floor(Math.random() * vibes.length)];
     }
+
+    // Audio autoplay + graceful fallback
+    const bgAudio = document.getElementById('bg-audio');
+    const audioPrompt = document.getElementById('audio-prompt');
+    bgAudio.play().then(() => {}).catch(() => audioPrompt.style.display = 'block');
+    document.addEventListener('click', () => { bgAudio.play(); audioPrompt.style.display = 'none'; }, { once: true });
   </script>
 </body>
 </html>
