@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday 🌿</title>
+  <style>
+    :root {
+      --bg: #f4f9f4;
+      --card: #fff8e7;
+      --accent: #6b8e6b;
+      --text: #4a4a4a;
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #e8f5e9, #fff8e1);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      line-height: 1.6;
+    }
+    .container { max-width: 600px; margin: 0 auto; text-align: center; }
+    .ghibli-header h1 { font-size: 2.2rem; color: var(--accent); margin-bottom: 0.5rem; }
+    .subtitle { font-size: 1rem; opacity: 0.85; margin-bottom: 2rem; }
+    .loot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 1.5rem 1rem;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, background 0.2s;
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .card:hover, .card:focus { transform: translateY(-3px); }
+    .card-front { font-size: 2.5rem; transition: opacity 0.2s; }
+    .card-back { 
+      font-size: 0.95rem; 
+      opacity: 0; 
+      position: absolute; 
+      padding: 0 1rem;
+      transition: opacity 0.2s;
+    }
+    .card.flipped .card-back { opacity: 1; }
+    .card.flipped .card-front { opacity: 0; }
+    .notes {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+    .notes h2 { font-size: 1.3rem; color: var(--accent); margin-bottom: 0.8rem; }
+    .notes ul { padding-left: 1.2rem; margin-bottom: 0.8rem; }
+    .notes li { margin-bottom: 0.4rem; }
+    .small { font-size: 0.85rem; opacity: 0.7; }
+    .signoff { margin-top: 2rem; font-style: italic; opacity: 0.85; }
+    @media (max-width: 480px) {
+      .ghibli-header h1 { font-size: 1.8rem; }
+      .loot-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header class="ghibli-header">
+      <h1>Happy Birthday 🎂</h1>
+      <p class="subtitle">It’s already your day over there, so consider this a little birthday bridge across timezones.</p>
+    </header>
+
+    <section class="loot-grid">
+      <div class="card" onclick="this.classList.toggle('flipped')">
+        <div class="card-front">🐱</div>
+        <div class="card-back">A cat just claimed your lap as a birthday throne. Bow to them.</div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('flipped')">
+        <div class="card-front">🍜</div>
+        <div class="card-back">Birthday ramen rule: add one extra topping you don’t usually buy.</div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('flipped')">
+        <div class="card-front">⛏️</div>
+        <div class="card-back">You’ve spawned in a birthday village. Trade 1 worry for 1 good memory.</div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('flipped')">
+        <div class="card-front">🎬</div>
+        <div class="card-back">Ghibli birthday law: clouds, cozy food, and zero rush. You’re allowed to just exist today.</div>
+      </div>
+    </section>
+
+    <section class="notes">
+      <h2>Things I remember you like</h2>
+      <ul>
+        <li>Cats (especially the ones that act like they own everything)</li>
+        <li>Minecraft (building, exploring, or just avoiding creepers)</li>
+        <li>Ramen (any kind, as long as it’s warm)</li>
+        <li>Studio Ghibli (the kind of comfort that doesn’t need words)</li>
+      </ul>
+      <p class="small">This isn’t a test. Just me paying attention. 🐾</p>
+    </section>
+
+    <footer class="signoff">
+      <p>No need to reply. No expectations. Just a little digital soot sprite delivering good vibes your way. 🌿✨</p>
+    </footer>
+  </main>
+</body>
+</html>
